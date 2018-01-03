@@ -38,6 +38,19 @@ def gradDescent(theta,X,y,alpha,iter):
 		J_history[i]=costFunction(theta,X,y)
 	return theta,J_history
 
+######随机梯度下降######
+def SGD(theta,X,y,alpha,iter):
+	m=X.shape[0]
+	J_history_sgd=zeros([iter,1])
+	for j in range(iter):
+		for i in range(m):
+			h=X[i,:].dot(theta)
+			e=mat(h-y[i,:])
+			Xtrans=mat(X[i,:]).T
+			theta = theta-alpha*Xtrans.dot(e)
+			J_history_sgd[j]=costFunction(theta,X[i,:],y[i,:])
+	return theta,J_history_sgd
+
 ######预测函数######
 def predict(theta,x):
 	h=x.dot(theta)       #计算h预测值
@@ -74,6 +87,19 @@ plot(range(iter),J_history,'-')
 xlabel('iterations')
 ylabel('J(theta)')
 title('plot of J(theta)')
+show()
+
+#####随机梯度算法
+alpha_sgd=0.01170
+iter_sgd=30
+theta_sgd,J_history_sgd=SGD(init_theta,X,datay,alpha_sgd,iter_sgd)
+print('Theta found by SGD: ',theta_sgd)
+
+#####检查随机梯度下降是否收敛#####
+plot(range(iter_sgd),J_history_sgd,'-')
+xlabel('iterations')
+ylabel('J(theta)')
+title('plot of SGD J(theta)')
 show()
 
 #####预测两组数据
