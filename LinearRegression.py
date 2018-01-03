@@ -68,6 +68,14 @@ alpha=0.01
 iter=1500
 theta,J_history=gradDescent(init_theta,X,datay,alpha,iter)
 print('Theta found by gradient descent: ',theta)
+
+#####检查梯度下降是否收敛#####
+plot(range(iter),J_history,'-')
+xlabel('iterations')
+ylabel('J(theta)')
+title('plot of J(theta)')
+show()
+
 #####预测两组数据
 t1=array([1,3.5])
 print('prediction of t1: ',predict(theta,t1)) 
